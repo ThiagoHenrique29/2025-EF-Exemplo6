@@ -9,6 +9,7 @@ public class Livro
     public string Titulo { get; set; }
     public int? Paginas { get; set; }
     public Autor Autor { get; set; }
+    public ICollection<LivroGenero> Generos { get; set; }
 }
 
 public class LivroConfiguration : IEntityTypeConfiguration<Livro>
