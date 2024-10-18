@@ -10,8 +10,10 @@ public class Livro
     public string Titulo { get; set; }
     public int? Paginas { get; set; }
     public Autor Autor { get; set; }
-    public ICollection<LivroGenero> Generos { get; set; }
+    public ICollection<LivroGenero> Generos { get; set; } = new List<LivroGenero>();
+    public int QuantidadeEmEstoque { get; set; } 
 }
+
 
 public class LivroConfiguration : IEntityTypeConfiguration<Livro>
 {
@@ -21,6 +23,7 @@ public class LivroConfiguration : IEntityTypeConfiguration<Livro>
         builder.HasIndex(p => p.Titulo);
         builder.Property(p => p.ISBN).HasMaxLength(13).IsRequired();
         builder.Property(p => p.Titulo).HasMaxLength(120).IsRequired();
+        builder.Property(p => p.QuantidadeEmEstoque).IsRequired();
     }
 }
 

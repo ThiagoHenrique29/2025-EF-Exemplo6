@@ -35,18 +35,22 @@ public static class OperacoesAutor
     public static void Listar()
     {
         using var db = new AplicacaoDbContext();
-        // desligando acompanhamento de objetos NA CONSULTA
         var autores = db.Autor
-            .AsNoTracking().
-            Include(p => p.Endereco);
+            .AsNoTracking()
+            .Include(p => p.Endereco)
+            .ToList(); 
+
         Console.WriteLine("Nome, DataNascimento, Endereço");
         foreach (var autor in autores)
         {
-            Console.WriteLine($"{autor.Nome}, {autor.DataNascimento.ToString()}," +
-                              $" {autor.Endereco.Logradouro}, {autor.Endereco.Cidade} " +
-                              $"({autor.Endereco.UF}), {autor.Endereco.CEP}");
+            var enderecoInfo = autor.Endereco != null
+                ? $"{autor.Endereco.Logradouro}, {autor.Endereco.Cidade} ({autor.Endereco.UF}), {autor.Endereco.CEP}"
+                : "Endereço não disponível";
+        
+            Console.WriteLine($"{autor.Nome}, {autor.DataNascimento}, {enderecoInfo}");
         }
     }
+
     public static void ListarComChave()
     {
         using var db = new AplicacaoDbContext();
