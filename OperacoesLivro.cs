@@ -123,14 +123,6 @@ public static class OperacoesLivro
     }
 
 
-    Console.WriteLine($"Quantidade em estoque atual: {livro.QuantidadeEmEstoque}");
-    Console.Write("Nova quantidade em estoque (deixe em branco para não alterar): ");
-    var estoqueInput = Console.ReadLine().Trim();
-    if (!string.IsNullOrWhiteSpace(estoqueInput) && int.TryParse(estoqueInput, out var novaQuantidade) && novaQuantidade >= 0)
-    {
-        livro.QuantidadeEmEstoque = novaQuantidade;
-    }
-
 
     livro.Generos = ObterGenerosDoUsuario(db, livro.ISBN);
 
@@ -272,7 +264,7 @@ public static class OperacoesLivro
             try
             {
                 db.SaveChanges();
-                Console.WriteLine($"Venda registrada do livro '{livro.Titulo}'. Estoque atual: {livro.QuantidadeEmEstoque}");
+                Console.WriteLine($"Venda registrada do livro '{livro.Titulo}'. Estoque atual : {livro.QuantidadeEmEstoque}");
             }
             catch (DbUpdateException ex)
             {
@@ -281,7 +273,7 @@ public static class OperacoesLivro
         }
         else
         {
-            Console.WriteLine("Quantidade inválida!");
+            Console.WriteLine("Quantidade inválida! ");
         }
     }
 
